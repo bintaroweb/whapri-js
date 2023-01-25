@@ -1,2 +1,4 @@
 node_modules
 .env
+whatsapp-sessions.json
+.wwebjs_auth

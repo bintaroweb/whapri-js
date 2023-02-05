@@ -1,4 +1,4 @@
-const { sessions } = require('../Controller/Session.js')
+const { getSession} = require('../Controller/Session.js')
 const wa = require('whatsapp-web.js')
 const phoneNumberFormatter = require("../Helpers/Formatter.js")
 
@@ -9,12 +9,17 @@ const index = (req, res) => {
     res.send('Halaman pesan');
 }
 
-const create = (req, res) => {
+const create = async (req, res) => {
+    console.log(req.body);
+    const sessions = req.session;
+    
     const sender = req.body.device;
     const number = phoneNumberFormatter(req.body.receiver);
     const message = req.body.message;
 
     const client = sessions.find(sess => sess.id == sender)?.client;
+
+    console.log(client);
 
     // Make sure the sender is exists & ready
     if (!client) {
